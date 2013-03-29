@@ -17,3 +17,5 @@ places
 savefile/
 /prelude-modules.el
 projectile-bookmarks.eld
+.emacs.desktop*
+ac-comphist.dat
