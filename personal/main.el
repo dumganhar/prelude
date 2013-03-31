@@ -6,6 +6,9 @@
 (load-file "~/.emacs.d/themes/color-theme-almost-monokai.el")
 (color-theme-almost-monokai)
 
+;; 正则匹配大小写敏感
+(setq-default case-fold-search nil) ; require exact matches
+
 (require 'linum)
 (global-linum-mode)
 
