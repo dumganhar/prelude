@@ -104,8 +104,8 @@ If set/leave chinese-font-size to nil, it will follow english-font-size"
                         zh-font))))
 
 (qiang-set-font
- '("Consolas" "Monaco" "DejaVu Sans Mono" "Monospace" "Courier New") ":pixelsize=14"
- '("文泉驿等宽微米黑" "黑体" "新宋体" "宋体" "Microsoft Yahei"))
+ '("Monaco" "Consolas" "DejaVu Sans Mono" "Monospace" "Courier New") ":pixelsize=14"
+ '("SimSun" "文泉驿等宽微米黑" "黑体" "新宋体" "宋体" "Microsoft Yahei") )
 
 ;; c c++ 配置
 (require 'init-cc-mode)
