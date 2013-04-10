@@ -9,6 +9,12 @@
 ;; 正则匹配大小写敏感
 (setq-default case-fold-search nil) ; require exact matches
 
+;; Set tab width
+(setq-default indent-tabs-mode nil)
+(setq-default tab-width 4)
+(setq-default tab-stop-list '(4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72 76 80))
+
+;; Show line number
 (require 'linum)
 (global-linum-mode)
 
