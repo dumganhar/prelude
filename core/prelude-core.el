@@ -88,7 +88,7 @@ Position the cursor at it's beginning, according to the current mode."
   (move-beginning-of-line nil)
   (newline-and-indent)
   (forward-line -1)
-  (funcall indent-line-function))
+  (indent-according-to-mode))
 
 (defun prelude-smart-open-line ()
   "Insert an empty line after the current line.
@@ -294,6 +294,8 @@ buffer is not visiting a file."
 (defadvice ido-find-file (after find-file-sudo activate)
   "Find file as root if necessary."
   (unless (or (equal major-mode 'dired-mode)
+              (and (buffer-file-name)
+                   (not (file-exists-p (file-name-directory (buffer-file-name)))))
               (and (buffer-file-name)
                    (file-writable-p buffer-file-name)))
     (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
