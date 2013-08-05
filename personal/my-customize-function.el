@@ -44,8 +44,74 @@
   (while (search-forward "CC_UNUSED" nil t) (replace-match "" nil t))
 
   (goto-char 1)
-  (while (search-forward "" nil t) (replace-match "" nil t))
+  (while (search-forward "
+" nil t) (replace-match "" nil t))
 
   )
+
+(defun copy-line (&optional arg)
+ "Save current line into Kill-Ring without mark the line"
+ (interactive "P")
+ (let ((beg (line-beginning-position)) 
+   (end (line-end-position arg)))
+ (copy-region-as-kill beg end))
+)
+
+
+(defun copy-word (&optional arg)
+ "Copy words at point"
+ (interactive "P")
+ (let ((beg (progn (if (looking-back "[a-zA-Z0-9]" 1) (backward-word 1)) (point))) 
+   (end (progn (forward-word arg) (point))))
+ (copy-region-as-kill beg end))
+)
+
+
+(defun copy-paragraph (&optional arg)
+ "Copy paragraphes at point"
+ (interactive "P")
+ (let ((beg (progn (backward-paragraph 1) (point))) 
+   (end (progn (forward-paragraph arg) (point))))
+ (copy-region-as-kill beg end))
+)
+
+(defun removeHungaryNaming_1 ()
+  ;;  (interactive)
+  (goto-char (point-min))
+  ;; (while (search-forward-regexp "\\([ \\t]*\\*[ \\t]*\\)\\(p\\|pob\\|psz\\)\\([A-Z]\\)" nil t) 
+  (while (search-forward-regexp "\\([^A-Za-z]\\)\\(p\\|pob\\|psz\\)\\([A-Z]\\)\\([a-z]\\)" nil t)
+    (replace-match (concat (match-string 1)
+                           (downcase (match-string 3))
+                           (match-string 4)
+                           ) t nil)))
+
+(defun removeHungaryNaming_2 ()
+  ;;  (interactive)
+  (goto-char (point-min))
+  ;; (while (search-forward-regexp "\\([ \\t]*\\*[ \\t]*\\)\\(p\\|pob\\|psz\\)\\([A-Z]\\)" nil t) 
+  (while (search-forward-regexp "\\([^A-Za-z]\\)\\(p\\|pob\\|psz\\)\\([A-Z][A-Z]\\)" nil t)
+    (replace-match "\\1\\3") t nil))
+
+
+(defun my-process-file (fPath)
+  "Process the file at path FPATH …"
+  (let ( fileChanged-p )
+    (with-temp-buffer
+      (insert-file-contents fPath)
+
+      ;; process text …
+      (when (not (string-match "\\(unzip\\|third_party\\|kazmath\\)" fPath))
+        (when (string-match "\\(cocos2dx\\/\\|CocosDenshion\\/\\|extensions\\/\\|samples\\/\\)" fPath)
+          (removeHungaryNaming_1)
+          ;; (removeHungaryNaming_2)
+          ;; set fileChanged-p to true/false
+          (setq fileChanged-p t)
+      (when fileChanged-p (write-region 1 (point-max) fPath) ))))))
+
+(require 'find-lisp)
+
+
+(mapc 'my-process-file (find-lisp-find-files "/Users/james/Project/cocos2d-x/cocos2dx" "\\.\\(cpp\\|h\\|mm\\)$"))
+
 
 (provide 'my-customize-function)

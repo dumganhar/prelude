@@ -2,9 +2,9 @@
 
 (scroll-bar-mode -1);去掉滚动条
 (disable-theme 'zenburn)
-;; color theme
-(load-file "~/.emacs.d/themes/color-theme-almost-monokai.el")
-(color-theme-almost-monokai)
+; ;; color theme
+; (load-file "~/.emacs.d/themes/color-theme-almost-monokai.el")
+; (color-theme-almost-monokai)
 
 ;; 正则匹配大小写敏感
 (setq-default case-fold-search nil) ; require exact matches
@@ -111,7 +111,7 @@ If set/leave chinese-font-size to nil, it will follow english-font-size"
 
 (setq face-font-rescale-alist '(("Microsoft Yahei" . 1.2) ("WenQuanYi Zen Hei" . 1.2)))
 (qiang-set-font
- '("Monaco" "Consolas" "DejaVu Sans Mono" "Monospace" "Courier New") 14
+ '("Monaco" "Consolas" "DejaVu Sans Mono" "Monospace" "Courier New") 12
  '("WenQuanyi Micro Hei Mono" "SimSun" "Microsoft Yahei" "文泉驿等宽微米黑" "黑体" "新宋体" "宋体") )
 
 
@@ -123,3 +123,4 @@ If set/leave chinese-font-size to nil, it will follow english-font-size"
 
 ;; c c++ 配置
 (require 'init-cc-mode)
+
