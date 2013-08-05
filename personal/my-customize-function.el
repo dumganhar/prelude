@@ -110,8 +110,8 @@
 
 (require 'find-lisp)
 
-
-(mapc 'my-process-file (find-lisp-find-files "/Users/james/Project/cocos2d-x/cocos2dx" "\\.\\(cpp\\|h\\|mm\\)$"))
+(defun remove-hungary-naming()
+  (mapc 'my-process-file (find-lisp-find-files "/Users/james/Project/cocos2d-x/cocos2dx" "\\.\\(cpp\\|h\\|mm\\)$")))
 
 
 (provide 'my-customize-function)
